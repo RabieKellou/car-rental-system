@@ -21,8 +21,8 @@ class CreateReservationsTable extends Migration
 
             $table->foreignId('car_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('pickup_loc')->constrained()->on('locations');
-            $table->foreignId('return_loc')->constrained()->on('locations');
+            $table->foreignId('pickup_loc')->constrained('locations');
+            $table->foreignId('return_loc')->constrained('locations');
 
             $table->timestamps();
         });
