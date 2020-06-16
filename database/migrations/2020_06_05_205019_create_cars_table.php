@@ -16,9 +16,13 @@ class CreateCarsTable extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
             $table->string('car_desc', 255);
-            $table->string('color', 45);
             $table->string('brand', 45);
             $table->string('model', 45);
+            $table->enum('fuelType', ['diesel', 'gasoline', 'electric']);
+            $table->enum('gearBoxType', ['manual', 'automatic']);
+            $table->unsignedInteger('doorCount');
+            $table->unsignedInteger('seatCount');
+            $table->decimal('price');
             $table->date('purchase_date');
             $table->foreignId('category_id')->constrained();
 

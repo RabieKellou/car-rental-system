@@ -10,7 +10,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Reservation::class, function (Faker $faker) {
     return [
-        'amount' => $faker->randomFloat(),
+        'amount' => $faker->randomFloat(2, 60, 200),
         'pickup_date' => $faker->date(),
         'return_date' => $faker->date(),
         'car_id' => $faker->randomElement(Car::pluck('id')),

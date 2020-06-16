@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Car;
+use App\Image;
 use Illuminate\Http\Request;
 
-class CarController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        return view('cars.index');
+        //
     }
 
     /**
@@ -41,22 +41,21 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Car  $car
+     * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Image $image)
     {
-        $data['car'] = Car::with(['features', 'category'])->findOrFail($id);
-        return view('cars.show', $data);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Car  $car
+     * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function edit(Car $car)
+    public function edit(Image $image)
     {
         //
     }
@@ -65,10 +64,10 @@ class CarController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Car  $car
+     * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Car $car)
+    public function update(Request $request, Image $image)
     {
         //
     }
@@ -76,10 +75,10 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Car  $car
+     * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Car $car)
+    public function destroy(Image $image)
     {
         //
     }
