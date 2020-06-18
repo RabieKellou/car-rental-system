@@ -23,3 +23,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Car
 Route::resource('cars', 'CarController');
+//REview
+Route::resource('reviews', 'ReviewController');

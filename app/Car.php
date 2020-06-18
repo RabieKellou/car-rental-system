@@ -6,6 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Car extends Model
 {
+    protected $fillable = [
+        'car_desc',
+        'brand',
+        'model',
+        'fuelType',
+        'gearBoxType',
+        'doorCount',
+        'seatCount',
+        'price',
+        'purchase_date',
+        'category_id',
+    ];
     // Relationships
     public function category()
     {
@@ -20,5 +32,10 @@ class Car extends Model
     public function images()
     {
         return $this->hasMany(Image::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }

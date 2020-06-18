@@ -12,13 +12,13 @@
                     </h2>
                     <div class="car-preview-crousel">
                         <div class="single-car-preview">
-                            <img src="assets/img/car/car-5.jpg" alt="JSOFT">
+                            <img src="{{ asset('img/car/car-5.jpg')}}" alt="JSOFT">
                         </div>
                         <div class="single-car-preview">
-                            <img src="assets/img/car/car-1.jpg" alt="JSOFT">
+                            <img src="{{ asset('img/car/car-1.jpg')}}" alt="JSOFT">
                         </div>
                         <div class="single-car-preview">
-                            <img src="assets/img/car/car-6.jpg" alt="JSOFT">
+                            <img src="{{ asset('img/car/car-6.jpg')}}" alt="JSOFT">
                         </div>
                     </div>
                     <div class="car-details-info">
@@ -57,7 +57,7 @@
                                     <div class="tech-info-list">
                                         <ul>
                                             @foreach ($car->features as $feature)
-                                            <li>{{ $feature->name }}</li>
+                                            <li class="m-1">{{ $feature->name }}</li>
                                             @endforeach
                                         </ul>
                                     </div>
@@ -66,19 +66,20 @@
                         </div>
 
                         <div class="review-area">
-                            <h3>Be the first to review “Aston Martin One-77”</h3>
+                            <h3>Be the first to review “{{ $car->brand . ' ' . $car->model }}”</h3>
                             <div class="review-star">
-                                <p class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star unmark"></i>
-                                    <i class="fa fa-star unmark"></i>
+
+                                <p class="rating" id="rating-area">
+                                    <i class="fa fa-star" data-value="1"></i>
+                                    <i class="fa fa-star unmark" data-value="2"></i>
+                                    <i class="fa fa-star unmark" data-value="3"></i>
+                                    <i class="fa fa-star unmark" data-value="4"></i>
+                                    <i class="fa fa-star unmark" data-value="5"></i>
                                 </p>
                             </div>
                             <div class="review-form">
-                                <form action="index.html">
-                                    <div class="row">
+                                <form method="POST" action="{{ route('reviews.store') }}" id="review-form">
+                                    {{-- <div class="row">
                                         <div class="col-lg-6 col-md-6">
                                             <div class="name-input">
                                                 <input type="text" placeholder="Full Name">
@@ -90,19 +91,26 @@
                                                 <input type="email" placeholder="Email Address">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
+                                    @csrf
+                                    <input type="hidden" name="car_id" value="{{ $car->id }}">
+                                    <input type="hidden" name="rating" value="1" id="rating">
                                     <div class="message-input">
-                                        <textarea name="review" cols="30" rows="5"
-                                            placeholder="Write Your Feedback Here!"></textarea>
+                                        <textarea name="content" cols="30" rows="5"
+                                            placeholder="Write Your Feedback Here!">{{ old('content') }}</textarea>
                                     </div>
-
+                                    @error('content')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                     <div class="input-submit">
                                         <button type="submit">Submit</button>
                                         <button type="reset">Clear</button>
                                     </div>
                                 </form>
                             </div>
+
+                            <x-review-list :carId="$car->id"></x-review-list>
                         </div>
                     </div>
                 </div>
@@ -195,5 +203,33 @@
     </div>
 </section>
 <!--== Car List Area End ==-->
+<script>
+    let ratingArea = document.getElementById('rating-area');
+    let ratings = document.querySelectorAll('#rating-area');
+    let rating=1;
+    let ratingInput = document.querySelector('#rating');
+    console.log(ratingArea);
 
+    ratings.forEach(e=>{
+        e.addEventListener('click',(e)=>{
+            let ratingHTML='',i=1;
+            console.log(e.target.dataset);
+            rating=e.target.dataset.value;
+            while(i<=5){
+                if(i<=rating){
+                    ratingHTML+=`<i class="fa fa-star" data-value="${i}"> </i> `;
+                }
+                else{
+                    ratingHTML+=`<i class="fa fa-star unmark" data-value="${i}"> </i> `;
+                }
+
+                i++;
+            }
+            ratingInput.value=rating;
+            console.log(ratingInput.value);
+            ratingArea.innerHTML = ratingHTML;
+        });
+    });
+
+</script>
 @endsection

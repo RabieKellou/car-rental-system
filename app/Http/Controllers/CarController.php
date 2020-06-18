@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Car;
+use App\CarFeature;
+use App\Http\Requests\StoreCar;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -24,7 +26,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        return view('cars.create');
     }
 
     /**
@@ -33,11 +35,24 @@ class CarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCar $request)
     {
-        //
-    }
+        // Retrieve the validated input data...
+        // dd($request->all());
+        $validatedData = $request->validated();
 
+        $car = Car::create($validatedData);
+        // dd($car);
+        if ($validatedData['features'] ?? false) {
+            foreach ($validatedData['features'] as $feature) {
+                CarFeature::insert([
+                    'car_id' => $car->id,
+                    'feature_id' => $feature
+                ]);
+            }
+        }
+        return redirect()->route('cars.show', ['car' => $car->id]);
+    }
     /**
      * Display the specified resource.
      *
@@ -46,7 +61,7 @@ class CarController extends Controller
      */
     public function show($id)
     {
-        $data['car'] = Car::with(['features', 'category'])->findOrFail($id);
+        $data['car'] = Car::with(['features', 'category', 'reviews'])->findOrFail($id);
         return view('cars.show', $data);
     }
 

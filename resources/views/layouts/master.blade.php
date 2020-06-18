@@ -43,8 +43,10 @@
 
 
 
+
     <!--== Header Area Start ==-->
     <header id="header-area" class="fixed-top">
+
         <!--== Header Top Start ==-->
         <div id="header-top" class="d-none d-xl-block">
             <div class="container">
@@ -89,7 +91,7 @@
                     <div class="col-lg-8 d-none d-xl-block">
                         <nav class="mainmenu alignright">
                             <ul>
-                                <li><a href="{{ url('/home') }}">Accueil</a>
+                                <li><a href="/">Accueil</a>
 
                                 </li>
                                 <li><a href="#">About</a></li>
@@ -107,6 +109,7 @@
             </div>
         </div>
         <!--== Header Bottom End ==-->
+
     </header>
     <!--== Header Area End ==-->
 
@@ -191,7 +194,7 @@
 
     <!--== Scroll Top Area Start ==-->
     <div class="scroll-top">
-        <img src="img/scroll-top.png" alt="JSOFT">
+        <img src="{{ asset('img/scroll-top.png') }}" alt="JSOFT">
     </div>
     <!--== Scroll Top Area End ==-->
 

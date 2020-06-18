@@ -17,6 +17,6 @@ class DatabaseSeeder extends Seeder
             $this->command->info('the database is fresh');
         }
 
-        $this->call([UserSeeder::class, CategorySeeder::class, CarSeeder::class, LocationSeeder::class, PhoneSeeder::class, ReservationSeeder::class, FeatureSeeder::class, CarFeatureSeeder::class]);
+        $this->call([UserSeeder::class, CategorySeeder::class, CarSeeder::class, LocationSeeder::class, PhoneSeeder::class, ReservationSeeder::class, FeatureSeeder::class, CarFeatureSeeder::class, ReviewSeeder::class]);
     }
 }
