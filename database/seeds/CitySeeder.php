@@ -1,9 +1,10 @@
 <?php
 
-use App\Location;
+use App\City;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class LocationSeeder extends Seeder
+class CitySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +13,6 @@ class LocationSeeder extends Seeder
      */
     public function run()
     {
-
-        factory(Location::class, 30)->create();
+        factory(City::class, 10)->create();
     }
 }

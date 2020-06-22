@@ -22,9 +22,9 @@
     <!--=== Owl Carousel CSS ===-->
     <link href="{{ asset('css/plugins/owl.carousel.min.css')}}" rel="stylesheet">
     <!--=== Gijgo CSS ===-->
-    <link href="{{ asset('css/plugins/gijgo.css')}}" rel="stylesheet">
-    <!--=== FontAwesome CSS ===-->
     <link href="{{ asset('css/font-awesome.css')}}" rel="stylesheet">
+    <!--=== FontAwesome CSS ===-->
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <!--=== Theme Reset CSS ===-->
     <link href="{{ asset('css/reset.css')}}" rel="stylesheet">
     <!--=== Main Style CSS ===-->
@@ -206,8 +206,9 @@
     <!--=== Popper Min Js ===-->
     <!--=== Bootstrap Min Js ===-->
     <!--=== Gijgo Min Js ===-->
-    <script src={{ asset("js/main.js") }}></script>
-    <script src={{ asset("js/plugins/gijgo.js") }}></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+
+    {{-- <script src={{ asset("/js/plugins/gijgo.js") }}></script> --}}
     <!--=== Vegas Min Js ===-->
     <script src={{ asset("js/plugins/vegas.min.js") }}></script>
     <!--=== Isotope Min Js ===-->
@@ -227,6 +228,7 @@
 
 
     <!--=== Mian Js ===-->
+    <script src={{ asset("js/main.js") }}></script>
 
 
 </body>

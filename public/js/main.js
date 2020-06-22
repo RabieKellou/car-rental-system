@@ -26,10 +26,11 @@
         --------------------------------- */
 
         // Home Page 0ne Date Picker JS
-        var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+        var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay()).toLocaleDateString();
         $('#startDate').datepicker({
-            uiLibrary: 'bootstrap4',
+            // uiLibrary: 'bootstrap4',
             iconsLibrary: 'fontawesome',
+            calendarWeeks: true,
             minDate: today,
             maxDate: function () {
                 return $('#endDate').val();
@@ -37,8 +38,9 @@
         });
 
         $('#endDate').datepicker({
-            uiLibrary: 'bootstrap4',
+            // uiLibrary: 'bootstrap4',
             iconsLibrary: 'fontawesome',
+            calendarWeeks: true,
             minDate: function () {
                 return $('#startDate').val();
             }
@@ -125,7 +127,7 @@
         // Testimonial Carousel End
 
 
-        // Video Bg JS 
+        // Video Bg JS
         $('#mobileapp-video-bg').YTPlayer({
             fitToBackground: true,
             videoURL: 'm5_AKjDdqaU',
@@ -160,8 +162,7 @@
             color: '#000',
             animation: 'random',
             animationDuration: 20000,
-            slides: [
-                {
+            slides: [{
                     src: 'assets/img/slider-img/slider-img-1.jpg'
                 },
                 {
@@ -248,12 +249,12 @@
 
     }); //Ready Function End
 
-    jQuery(window).load(function () {
-        jQuery('.preloader').fadeOut();
-        jQuery('.preloader-spinner').delay(350).fadeOut('slow');
-        jQuery('body').removeClass('loader-active');
-        jQuery(".popular-car-gird").isotope();
-    }); //window load End
+    // jQuery(window).load(function () {
+    //     jQuery('.preloader').fadeOut();
+    //     jQuery('.preloader-spinner').delay(350).fadeOut('slow');
+    //     jQuery('body').removeClass('loader-active');
+    //     jQuery(".popular-car-gird").isotope();
+    // }); //window load End
 
 
 }(jQuery));

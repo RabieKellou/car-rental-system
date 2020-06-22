@@ -23,6 +23,7 @@ $factory->define(User::class, function (Faker $faker) {
         'last_name' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'phone' => $faker->phoneNumber,
+        'cin' => 'UA' . random_int(10000, 100000),
         'city' => $faker->city,
         'country' => $faker->country,
         'email_verified_at' => now(),

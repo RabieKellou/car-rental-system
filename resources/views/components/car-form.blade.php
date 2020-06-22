@@ -5,7 +5,11 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ $action }}">
+                        @if($editing)
+                        @method('PUT')
+                        @endif
                         @csrf
+
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <label class="col-form-label" for="category">Category </label>
@@ -118,7 +122,12 @@
                                     <label class="btn btn-light m-1" for="f-{{ $feature->id }}">
                                         {{ $feature->name }}
                                         <input type="checkbox" class="custom-control-input" name="features[]"
-                                            id="f-{{ $feature->id }}" value="{{ $feature->id }}" autocomplete="off">
+                                            id="f-{{ $feature->id }}" value="{{ $feature->id }}" autocomplete="off"
+                                            @if($editing &&
+                                            in_array($feature->id,$car->features->pluck('id')->toArray()))
+                                        checked
+                                        @endif
+                                        >
                                     </label>
                                     @endforeach
 

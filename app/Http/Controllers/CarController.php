@@ -73,7 +73,7 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        //
+        return view('cars.edit')->withCar($car);
     }
 
     /**
@@ -83,9 +83,14 @@ class CarController extends Controller
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Car $car)
+    public function update(StoreCar $request, Car  $car)
     {
-        //
+        $validatedData = $request->validated();
+        $car->update($validatedData);
+        if ($validatedData['features'] ?? false) {
+            $car->features()->sync($validatedData['features']);
+        }
+        return redirect()->route('cars.show', ['car' => $car->id]);
     }
 
     /**
@@ -96,6 +101,7 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+        Car::findOrFail($car->id)->delete();
+        return redirect()->back();
     }
 }

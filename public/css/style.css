@@ -3242,3 +3242,12 @@ body,
     opacity: 1;
     visibility: visible;
 }
+
+#startDate {
+    width: 100%;
+}
+
+
+#endDate {
+    width: 100%;
+}

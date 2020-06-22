@@ -2,12 +2,15 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\City;
 use App\Location;
 use Faker\Generator as Faker;
 
-$factory->define(Location::class, function (Faker $faker) {
+$cities = City::all()->pluck('id');
+$factory->define(Location::class, function (Faker $faker) use ($cities) {
+
     return [
-        'street' => $faker->streetAddress,
-        'city' => $faker->city
+        'address' => $faker->streetAddress,
+        'city_id' => $faker->randomElement($cities)
     ];
 });

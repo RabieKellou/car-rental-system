@@ -1,5 +1,6 @@
 <?php
 
+use App\City;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $data['cities'] = City::cursor();
+    return view('home', $data);
 });
 
 Auth::routes();
@@ -25,3 +27,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('cars', 'CarController');
 //REview
 Route::resource('reviews', 'ReviewController');
+//Reservation
+Route::resource('reservations', 'ReservationController');
+
+Route::get('api/cities/{city_id}', function ($city_id) {
+    $locations = City::findOrFail($city_id)->locations;
+    return response()->json($locations);
+});

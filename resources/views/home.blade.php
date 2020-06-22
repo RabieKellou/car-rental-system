@@ -34,14 +34,12 @@ You are logged in!
                         <form action="index.html">
                             <!--== Pick Up Location ==-->
                             <div class="pickup-location book-item">
-                                <h4>LOCATION:</h4>
+                                <h4>Ville:</h4>
                                 <select class="custom-select">
-                                    <option selected>sélectionner</option>
-                                    <option value="1">Meknes</option>
-                                    <option value="2">Rabat</option>
-                                    <option value="3">Tanger</option>
-                                    <option value="3">Alhoceima</option>
-                                    <option value="3">Marrakech</option>
+                                    <option selected>choisir une ville</option>
+                                    @foreach($cities as $city)
+                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                    @endforeach
 
                                 </select>
                             </div>
@@ -59,20 +57,10 @@ You are logged in!
                             </div>
                             <!--== Pick Up Location ==-->
 
-                            <!--== Car Choose ==-->
-                            <div class="choose-car-type book-item">
-                                <h4>TYPE DE VOITURE:</h4>
-                                <select class="custom-select">
-                                    <option selected>sélectionner</option>
-                                    <option value="1">BMW</option>
-                                    <option value="2">Audi</option>
-                                    <option value="3">Lexus</option>
-                                </select>
-                            </div>
-                            <!--== Car Choose ==-->
+
 
                             <div class="book-button text-center">
-                                <button class="book-now-btn">chercher</button>
+                                <button class="book-now-btn">Chercher</button>
                             </div>
                         </form>
                     </div>

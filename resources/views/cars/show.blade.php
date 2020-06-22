@@ -8,6 +8,8 @@
             <!-- Car List Content Start -->
             <div class="col-lg-8">
                 <div class="car-details-content">
+                    <!-- Button trigger modal -->
+
                     <h2>{{ $car->brand  }} {{ $car->model }} <span class="price">Rent: <b>DH{{ $car->price }}</b></span>
                     </h2>
                     <div class="car-preview-crousel">
@@ -22,7 +24,8 @@
                         </div>
                     </div>
                     <div class="car-details-info">
-                        <h4>Additional Info</h4>
+
+                        <h4>info</h4>
                         <p>{{ $car->car_desc }}</p>
                         <div class="technical-info">
                             <div class="row">
@@ -62,7 +65,14 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <div class="input-submit m-auto">
+
+                                    <button type="button" data-toggle="modal" data-target="#modelId">
+                                        Reserver
+                                    </button>
+                                </div>
                             </div>
+
                         </div>
 
                         <div class="review-area">
@@ -117,6 +127,26 @@
             </div>
             <!-- Car List Content End -->
 
+
+            <!-- Modal -->
+            <div class="modal" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Reservation</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <x-reservation-form action="{{ route('reservations.store') }}" :carId="$car->id">
+                            </x-reservation-form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
             <!-- Sidebar Area Start -->
             <div class="col-lg-4">
                 <div class="sidebar-content-wrap m-t-50">
@@ -230,6 +260,34 @@
             ratingArea.innerHTML = ratingHTML;
         });
     });
+
+
+    const cities=document.querySelectorAll('#reservation-from .city');
+    cities.forEach(city => {
+        city.addEventListener('change',function(e){
+            city_id=e.target.value;
+            fetch(`/api/cities/${city_id}`)
+            .then(res=> res.json())
+            .then(data=>{
+                let elm;
+                let content="";
+                if(e.target.dataset.city==='a'){
+                    elm=document.getElementById('pickup_loc');
+                }else{
+                    elm=document.getElementById('return_loc');
+                }
+                data.map((location)=>{
+                    content+=`<option value="${location.id}"> ${location.address} </option>`;
+                });
+              elm.innerHTML=content;
+            })
+
+    });
+    });
+
+
+
+
 
 </script>
 @endsection
